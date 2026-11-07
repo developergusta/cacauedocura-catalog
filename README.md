@@ -10,6 +10,7 @@ Catálogo em React (Vite) dos brigadeiros gourmet da Cacau e Doçura.
 - Sem número de WhatsApp no catálogo — o pedido é copiado para colar na
   conversa. Se a dona informar o número, o botão de copiar pode virar um
   link `wa.me` depois.
+- O botão final envia o pedido pronto no WhatsApp da Cacau e Doçura (+55 11 91503-1409): abre `wa.me/5511915031409` com a mensagem estruturada (formato, quantidade, sabores e total). O botão "Copiar meu pedido" continua como alternativa.
 
 ## Rodar localmente
 

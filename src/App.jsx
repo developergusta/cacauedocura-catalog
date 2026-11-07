@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BRL, CATEGORIES, FLAVORS, FORMATS } from './data.js'
 
 const BOX_SIZE = 4
+const WHATSAPP_NUMBER = '5511915031409'
 
 function flavorById(id) {
   return FLAVORS.find((f) => f.id === id)
@@ -81,7 +82,7 @@ export default function App() {
   }
 
   function buildOrderText() {
-    const lines = ['Pedido — Cacau e Doçura']
+    const lines = ['Olá, Cacau e Doçura! Quero fazer um pedido:', '', 'Pedido — Cacau e Doçura']
     if (mode === 'caixinha') {
       lines.push(`Formato: Caixinha com 4 brigadeiros (25 g cada, 100 g) — ${BRL(15)} por caixa`)
       lines.push(`Quantidade: ${boxesQty} caixa(s)`)
@@ -123,6 +124,12 @@ export default function App() {
     setCopied(true)
     showToast('Pedido copiado — é só colar na conversa!')
     window.setTimeout(() => setCopied(false), 2600)
+  }
+
+  function sendViaWhatsApp() {
+    if (!orderReady) return
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildOrderText())}`
+    window.open(url, '_blank', 'noopener')
   }
 
   return (
@@ -389,7 +396,7 @@ export default function App() {
               </h2>
               <p>
                 Alterne entre caixinha e cento, escolha os sabores, ajuste a
-                quantidade e copie o pedido pronto para enviar.
+                quantidade e envie o pedido pronto no WhatsApp.
               </p>
             </div>
 
@@ -530,20 +537,30 @@ export default function App() {
                     {qty} × {BRL(format.price)} · {format.name}
                   </span>
                 </div>
-                <button
-                  type="button"
-                  className="btn btn-dark btn-copy"
-                  disabled={!orderReady}
-                  onClick={copyOrder}
-                >
-                  {copied ? 'Pedido copiado ✓' : 'Copiar meu pedido'}
-                </button>
+                <div className="order-actions">
+                  <button
+                    type="button"
+                    className="btn btn-dark btn-copy"
+                    disabled={!orderReady}
+                    onClick={sendViaWhatsApp}
+                  >
+                    Enviar pedido no WhatsApp
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-copy"
+                    disabled={!orderReady}
+                    onClick={copyOrder}
+                  >
+                    {copied ? 'Pedido copiado ✓' : 'Copiar meu pedido'}
+                  </button>
+                </div>
               </div>
               {!orderReady && (
                 <p className="builder-hint">
                   {mode === 'caixinha'
-                    ? 'Complete os 4 slots da caixinha para copiar o pedido.'
-                    : 'Adicione ao menos 1 brigadeiro ao cento para copiar o pedido.'}
+                    ? 'Complete os 4 slots da caixinha para enviar o pedido.'
+                    : 'Adicione ao menos 1 brigadeiro ao cento para enviar o pedido.'}
                 </p>
               )}
               {orderReady && (
