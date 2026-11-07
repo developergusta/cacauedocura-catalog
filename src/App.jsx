@@ -8,6 +8,15 @@ function flavorById(id) {
   return FLAVORS.find((f) => f.id === id)
 }
 
+// Esfera do brigadeiro: gradiente radial com luz no canto superior esquerdo,
+// mesma técnica do HTML original — o brilho e a textura vêm do CSS (.brigadeiro)
+function ballStyle(flavor) {
+  return {
+    background: `radial-gradient(circle at 32% 28%, ${flavor.color}, ${flavor.color} 55%, rgba(0,0,0,.28) 130%)`,
+    backgroundColor: flavor.color,
+  }
+}
+
 export default function App() {
   const [mode, setMode] = useState('caixinha')
   const [filter, setFilter] = useState('todos')
@@ -183,16 +192,13 @@ export default function App() {
             </div>
             <div className="hero-media reveal visible">
               <div className="hero-frame">
-                <div className="hero-art" aria-hidden="true">
-                  <span className="hero-dot" style={{ background: '#6B3D22' }} />
-                  <span className="hero-dot" style={{ background: '#84985A' }} />
-                  <span className="hero-dot" style={{ background: '#E79BB0' }} />
-                  <span className="hero-dot" style={{ background: '#EBD9AE' }} />
-                  <span className="hero-dot" style={{ background: '#2E1A0F' }} />
-                  <span className="hero-dot" style={{ background: '#EFAF35' }} />
-                </div>
-                <p className="hero-art-caption">Feitos à mão, um a um</p>
+                <img
+                  src="/images/caixa-presente.webp"
+                  alt="Caixa de presente com brigadeiros gourmet variados — Ninho com Nutella, pistache e chocolate branco — amarrada com fita dourada"
+                  loading="eager"
+                />
               </div>
+              <p className="hero-art-caption">Feitos à mão, um a um</p>
               <div className="float-badge fb1">
                 <b>R$ 15</b> caixinha com 4
               </div>
@@ -233,27 +239,20 @@ export default function App() {
                   key={f.id}
                   className={`fcard reveal ${mode === f.id ? 'fcard-active' : ''}`}
                 >
-                  <div className="fcard-art" aria-hidden="true">
-                    {f.id === 'caixinha' ? (
-                      <>
-                        <span className="mini-dot" style={{ background: '#6B3D22' }} />
-                        <span className="mini-dot" style={{ background: '#F0E3C2' }} />
-                        <span className="mini-dot" style={{ background: '#84985A' }} />
-                        <span className="mini-dot" style={{ background: '#E79BB0' }} />
-                      </>
-                    ) : (
-                      <span className="cento-dots">
-                        {FLAVORS.slice(0, 8).map((fl) => (
-                          <span
-                            key={fl.id}
-                            className="mini-dot"
-                            style={{ background: fl.color }}
-                          />
-                        ))}
-                        <span className="cento-more">+92</span>
-                      </span>
-                    )}
-                  </div>
+                  <img
+                    className="fcard-img"
+                    src={
+                      f.id === 'caixinha'
+                        ? '/images/bandeja-marmore.webp'
+                        : '/images/cento-festa.webp'
+                    }
+                    alt={
+                      f.id === 'caixinha'
+                        ? 'Bandeja de mármore com brigadeiros gourmet de chocolate, pistache e morango'
+                        : 'Travessa grande com um cento de brigadeiros de festa em forminhas, em sabores variados'
+                    }
+                    loading="lazy"
+                  />
                   <div className="fcard-body">
                     <h3>{f.name}</h3>
                     <p className="desc">{f.desc}</p>
@@ -333,8 +332,8 @@ export default function App() {
                         <article key={flavor.id} className="card reveal">
                           <div className="card-top">
                             <span
-                              className="brigadeiro"
-                              style={{ background: flavor.color }}
+                              className={`brigadeiro tex-${flavor.texture}`}
+                              style={ballStyle(flavor)}
                               aria-label={`Brigadeiro ${flavor.name}`}
                             />
                             {flavor.badge ? (
@@ -383,6 +382,79 @@ export default function App() {
                   </div>
                 </div>
               ))}
+          </div>
+        </section>
+
+        {/* DIFERENCIAL */}
+        <section id="diferencial">
+          <div className="wrap">
+            <div className="split reveal">
+              <img
+                className="split-img"
+                src="/images/ingredientes.webp"
+                alt="Ingredientes nobres sobre madeira: chocolate, pistache, limão-siciliano, maracujá, canela e morangos"
+                loading="lazy"
+              />
+              <div>
+                <p className="orn">O diferencial</p>
+                <h2>
+                  Não é brigadeiro <em>comum</em>
+                </h2>
+                <ul className="diff-list">
+                  <li>
+                    <b>Chocolate nobre</b> — ao leite premium (frequentemente
+                    belga), meio amargo e amargo de 50% a 70% de cacau e branco
+                    nobre com creme de leite.
+                  </li>
+                  <li>
+                    <b>Acabamento de confeitaria</b> — splits e granulados
+                    maciços de chocolate no lugar do granulado de açúcar, cacau
+                    em pó, raspas e castanhas trituradas.
+                  </li>
+                  <li>
+                    <b>Fruta de verdade</b> — redução de maracujá e de frutas
+                    vermelhas, raspas de limão-siciliano na massa e pasta pura
+                    de pistache italiana.
+                  </li>
+                  <li>
+                    <b>Pesado um a um</b> — 25 g por brigadeiro da caixinha
+                    (100 g por caixa) e 15 g no tamanho festa.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="steps reveal">
+              <p className="orn">Como pedir</p>
+              <h2>
+                Em <em>três passos</em>
+              </h2>
+              <ol className="steps-list">
+                <li>
+                  <span className="step-num">01</span>
+                  <b>Monte sua combinação</b>
+                  <p>
+                    Escolha o formato (caixinha ou cento), os sabores e a
+                    quantidade no montador abaixo.
+                  </p>
+                </li>
+                <li>
+                  <span className="step-num">02</span>
+                  <b>Envie no WhatsApp</b>
+                  <p>
+                    Toque em “Enviar pedido no WhatsApp” — a lista sai
+                    prontinha, com sabores, quantidades e total.
+                  </p>
+                </li>
+                <li>
+                  <span className="step-num">03</span>
+                  <b>Combine entrega e prazo</b>
+                  <p>
+                    Acerte os detalhes com a confeiteira. O cento é feito sob
+                    encomenda, então peça com antecedência.
+                  </p>
+                </li>
+              </ol>
+            </div>
           </div>
         </section>
 
@@ -439,8 +511,8 @@ export default function App() {
                           {flavor ? (
                             <>
                               <span
-                                className="brigadeiro small"
-                                style={{ background: flavor.color }}
+                                className={`brigadeiro small tex-${flavor.texture}`}
+                                style={ballStyle(flavor)}
                               />
                               <span>{flavor.name}</span>
                             </>
@@ -474,8 +546,8 @@ export default function App() {
                         return (
                           <li key={id}>
                             <span
-                              className="brigadeiro tiny"
-                              style={{ background: flavor.color }}
+                              className={`brigadeiro tiny tex-${flavor.texture}`}
+                              style={ballStyle(flavor)}
                             />
                             {flavor.name} <b>×{n}</b>
                             <button
