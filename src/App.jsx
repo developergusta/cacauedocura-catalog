@@ -100,7 +100,7 @@ export default function App() {
         lines.push(`- ${flavorById(id).name} ×${n}`)
       })
     } else {
-      lines.push(`Formato: Cento de festa (15 g cada) — ${BRL(130)} por cento`)
+      lines.push(`Formato: Cento de festa (15 g cada) — ${BRL(FORMATS.cento.price)} por cento`)
       lines.push(`Quantidade: ${centosQty} cento(s) — ${centoTotal} brigadeiro(s) na lista`)
       lines.push('Sabores do cento:')
       Object.entries(cento).forEach(([id, n]) => {
@@ -167,15 +167,15 @@ export default function App() {
               </h1>
               <p className="lede">
                 Brigadeiro gourmet feito à mão, com chocolate nobre e sabores
-                que vão do clássico ao pistache. Monte sua caixinha ou encomende
-                o cento para a festa — são os mesmos 13 sabores nos dois formatos.
+                que vão do clássico ao maracujá. Monte sua caixinha ou encomende
+                o cento para a festa — são os mesmos 10 sabores nos dois formatos.
               </p>
               <div className="hero-ctas">
                 <a className="btn btn-dark" href="#montar">
                   Montar meu pedido
                 </a>
                 <a className="btn btn-ghost" href="#sabores">
-                  Ver os 13 sabores
+                  Ver os 10 sabores
                 </a>
               </div>
               <div className="hero-meta">
@@ -183,10 +183,10 @@ export default function App() {
                   Caixinha com 4 · <b>R$ 15</b>
                 </span>
                 <span className="pill">
-                  Cento de festa · <b>R$ 130</b>
+                  Cento de festa · <b>R$ 160</b>
                 </span>
                 <span className="pill">
-                  <b>13</b> sabores
+                  <b>10</b> sabores
                 </span>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function App() {
                 <b>R$ 15</b> caixinha com 4
               </div>
               <div className="float-badge fb2">
-                <b>R$ 130</b> cento de festa
+                <b>R$ 160</b> cento de festa
               </div>
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function App() {
             <div className="sec-head reveal">
               <p className="orn">Os sabores</p>
               <h2>
-                Treze sabores, <em>quatro coleções</em>
+                Dez sabores, <em>quatro coleções</em>
               </h2>
               <p>
                 Escolha por coleção ou veja todos. Toque em um sabor para
@@ -303,7 +303,7 @@ export default function App() {
                 className={filter === 'todos' ? 'chip active' : 'chip'}
                 onClick={() => setFilter('todos')}
               >
-                Todos · 13
+                Todos · 10
               </button>
               {Object.values(CATEGORIES).map((c) => (
                 <button
@@ -413,8 +413,8 @@ export default function App() {
                   </li>
                   <li>
                     <b>Fruta de verdade</b> — redução de maracujá e de frutas
-                    vermelhas, raspas de limão-siciliano na massa e pasta pura
-                    de pistache italiana.
+                    vermelhas, raspas de limão-siciliano na massa e na
+                    decoração.
                   </li>
                   <li>
                     <b>Pesado um a um</b> — 25 g por brigadeiro da caixinha
@@ -647,7 +647,7 @@ export default function App() {
             <p className="footer-brand">Cacau e Doçura</p>
             <p>
               Brigadeiros gourmet feitos à mão. Caixinha com 4 por R$ 15 ·
-              Cento de festa por R$ 130.
+              Cento de festa por R$ 160.
             </p>
           </div>
         </footer>
