@@ -598,6 +598,6 @@ section { padding: 64px 0 8px; }
   .order-actions { width: 100%; }
   .btn-copy { width: 100%; min-height: 52px; }
   .total-value { font-size: 2.1rem; }
-  .nav-links a { padding: 10px 11px; }
+  .nav-links { display: none; }
   .toast { bottom: 16px; }
 }
